@@ -41,7 +41,19 @@ public:
 	}
 	T operator[](int item)
     {
-      return array[item];//возвращение элемента по скобкам
+    try{
+    	if ((item>=0)&&(item<size_n))
+    	{
+      	return array[item];//возвращение элемента по скобкам
+    	}
+    	else{
+    	throw 1;
+    }
+    }
+    catch(int a){
+      cout<<"Out of array, return 1 element of vector:"<<endl;
+      return array[0];
+    }
     }
 
     bool empty(){
@@ -147,6 +159,7 @@ int main(){
 	a.add(s);
 	a.add(s1);
 	cout<<a;
+	cout<<a[0]<<" "<<a[1]<<endl;
 	a.add(s2);
 	a.erase(2);
 	cout<<a; 
