@@ -85,7 +85,7 @@ public:
 		}
 
 	}
-	friend ostream& operator<< (std::ostream &out, Vector &point){
+	friend ostream& operator<< (ostream &out, Vector &point){
     if (!point.empty())//определение вывода
     {
     cout<<"---------"<<endl;
@@ -100,6 +100,14 @@ public:
     }
     return out;
     }
+    friend istream& operator>> (istream &in, Vector &point){
+		for (int i = 0; i < point.size_n;i++)
+		{
+			in>>point.array[i];
+		}
+		point.pos=point.size_n;
+		return in;
+	}
 };
 class Money{
 private:
@@ -121,19 +129,25 @@ public:
 		k = drob.k;
 		return *this;
 	}
-	friend ostream& operator<< (std::ostream &out, const Money &point){
+	friend ostream& operator<< (ostream &out, const Money &point){
      	out<<point.r<<","<<point.k;//определение оператора вывода 
     return out;
     }
+    friend istream& operator>> (istream &in, Money &point){
+    	cout<<"Enter rubly: ";
+		cin>>point.r;
+		cout<<"Enter kopeyki: ";
+		cin>>point.k;
+		return in;
+	}
 };
 int main(){
 	Vector<double> g1(10);
-	g1.add(4.56);
+	//g1<<4.56;
 	g1.add(5.234);
 	g1.add(7.12);
 	g1.add(6.123);
 	g1.add(7.965);
-	cout<<g1;
 	cout<<"double elemnts:"<<endl;
 	cout<<g1[2]<<" "<<g1[3]<<endl;
 	Vector<int> g(10);
@@ -162,6 +176,9 @@ int main(){
 	cout<<a[0]<<" "<<a[1]<<endl;
 	a.add(s2);
 	a.erase(2);
-	cout<<a; 
+	cout<<a;
+	Vector <Money> h(4);
+	cin>>h;
+	cout<<h; 
 	return 0;
 }
